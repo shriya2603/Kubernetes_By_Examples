@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: finance
+  name: redis
+spec:
+  containers:
+    - name: redis
+      image: redis

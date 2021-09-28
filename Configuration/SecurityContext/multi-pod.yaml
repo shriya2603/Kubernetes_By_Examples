@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-pod
+spec:
+  securityContext: # Pod level security context
+    runAsUser: 1001
+  containers:
+    - image: ubuntu
+      name: web
+      command: ["sleep", "5000"]
+      securityContext: # Container level security context
+        runAsUser: 1002 # Here the container level security context will overrides the pod level security context. web container will run under 1002 userId
+
+    - image: ubuntu
+      name: sidecar
+      command: ["sleep", "5000"]

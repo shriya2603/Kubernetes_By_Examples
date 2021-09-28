@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+  namespace: default
+spec:
+  securityContext:
+    runAsUser: 1010 # All the containers in this pod will run under the mentioned userId
+  containers:
+    - name: ubuntu-sleeper
+      image: ubuntu
+      command:
+        - "sleep"
+        - "4800"
