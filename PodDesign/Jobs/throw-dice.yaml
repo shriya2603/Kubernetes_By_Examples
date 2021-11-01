@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: throw-dice-job
+spec:
+  completions: 3
+  parallelism: 3
+  backoffLimit: 15 # This is so the job does not quit before it succeeds. There are situations where you want to fail a Job after some amount of retries due to a logical error in configuration etc. To do so, set .spec.backoffLimit to specify the number of retries before considering a Job as failed. The back-off limit is set by default to 6.
+  template:
+    spec:
+      containers:
+        - image: kodekloud/throw-dice
+          name: throw-dice
+      restartPolicy: Never
+# By Default →  restart policy : always
+# It can be always, never or onFailure.
+# Never: That means pod will run once . so in above ex exp would be executed once only.
+# OnFailure: means pod will restart only if there is a failure. So in ex : expression would be executed once but if it determined with error then it will run the container again.
+
